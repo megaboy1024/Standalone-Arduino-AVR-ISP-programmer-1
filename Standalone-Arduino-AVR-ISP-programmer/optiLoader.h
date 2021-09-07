@@ -16,8 +16,10 @@
 #define FUSE_HIGH 2			/* High fuse */
 #define FUSE_EXT 3			/* Extended fuse */
 
-#define LED_ERR 8
-#define LED_PROGMODE A0
+#define LED_ERR PD0
+//8
+#define LED_PROGMODE PD1
+//A0
 
 typedef struct image {
     char image_name[30];	       /* Ie "optiboot_diecimila.hex" */

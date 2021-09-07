@@ -188,6 +188,10 @@ void loop (void) {
      }
      hextext = hextextpos;
      pageaddr += pagesize;
+
+     // clear the buffer before the next read in case the address are not sequenced
+     //for (uint8_t i=0; i<pagesize; i++)
+      //pageBuffer[i] = 0xFF;
   }
   
   // Set fuses to 'final' state
@@ -220,7 +224,7 @@ void loop (void) {
 
 void error(const char *string) {
   Serial.println(string); 
-  digitalWrite(LED_ERR, HIGH);  
+  digitalWrite(LED_ERR, LOW);  
   while(1) {
     tone(PIEZOPIN, 4000, 500);
   }
@@ -270,7 +274,7 @@ void end_pmode () {
 boolean target_poweron ()
 {
   pinMode(LED_PROGMODE, OUTPUT);
-  digitalWrite(LED_PROGMODE, HIGH);
+  digitalWrite(LED_PROGMODE, LOW);
   digitalWrite(RESET, LOW);  // reset it right away.
   pinMode(RESET, OUTPUT);
   delay(100);
@@ -283,11 +287,6 @@ boolean target_poweron ()
 boolean target_poweroff ()
 {
   end_pmode();
-  digitalWrite(LED_PROGMODE, LOW);
+  digitalWrite(LED_PROGMODE, HIGH);
   return true;
 }
-
-
-
-
-
